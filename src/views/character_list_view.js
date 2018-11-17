@@ -18,14 +18,12 @@ CharacterListView.prototype.bindEvents = function () {
 
 CharacterListView.prototype.render = function () {
   console.log('CharacterListView.characters from list view.render', this.characters);
-  // this.characters.forEach((character) => {
+  // for (character of this.characters) {
   //   const characterView = new CharacterView(character, this.container);
   //   characterView.render();
-  // });
-  for (character of this.characters) {
-    const characterView = new CharacterView(character, this.container);
-    characterView.render();
-  };
+  // };
+  const characterView = new CharacterView(this.characters[0], this.container);
+  characterView.render();
 };
 
 module.exports = CharacterListView;
