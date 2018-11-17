@@ -11,14 +11,15 @@ Characters.prototype.bindEvents = function () {
   console.log('pageRange', pageRange);
   for (page of pageRange) {
     const request = new Request(`https://rickandmortyapi.com/api/character/?page=${page}`);
-    request.get((data) => {
+    request.get()
+    .then((data) => {
       for (character of data.results) {
         this.data.push(character);
       };
-      PubSub.publish('Characters:characters-ready', this.data);
     });
   };
-  console.log('characters data from within characters model bindEvents.get', this.data);
+  PubSub.publish('Characters:characters-ready', this.data);
+  console.log('characters data from within characters model bindEvents', this.data);
 };
 
 module.exports = Characters;
