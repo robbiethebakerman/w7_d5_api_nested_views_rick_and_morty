@@ -22,9 +22,34 @@ Characters.prototype.bindEvents = function () {
       PubSub.publish('Characters:characters-ready', this.data);
     });
   };
+
+  // for (page of pageRange) {
+  //   const request = new RequestHelper(`https://rickandmortyapi.com/api/character/?page=${page}`);
+  //   request.get((data) => {
+  //     for (character of data.results) {
+  //       this.data.push(character);
+  //     };
+  //     PubSub.publish('Characters:characters-ready', this.data);
+  //   });
+  // };
+
+  // const requestloop = new RequestHelper('https://rickandmortyapi.com/api/character');
+  // requestloop.get((data) => {
+  //   for (page of pageRange) {
+  //     requestloop.url = `https://rickandmortyapi.com/api/character/?page=${page}`;
+  //     requestloop.get((data) => {
+  //       for (character of data.results) {
+  //         this.data.push(character);
+  //       };
+  //     });
+  //   };
+  //   PubSub.publish('Characters:characters-ready', this.data);
+  // });
+
   console.log('characters data from within characters model bindEvents', this.data);
 };
-//
+
+
 // Characters.prototype.bindEvents = function () {
 //   const request = new RequestHelper(`https://rickandmortyapi.com/api/character`);
 //   request.get((data) => {
