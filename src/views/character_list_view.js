@@ -9,7 +9,6 @@ const CharacterListView = function (container) {
 CharacterListView.prototype.bindEvents = function () {
   PubSub.subscribe('Characters:characters-ready', (event) => {
     this.characters = event.detail;
-    // this.characters = [{'name': 'Rick'}];
     console.log('CharacterListView.characters from list view.bindEvents', this.characters);
     this.render();
     console.log('list view should be rendered now');
@@ -18,12 +17,10 @@ CharacterListView.prototype.bindEvents = function () {
 
 CharacterListView.prototype.render = function () {
   console.log('CharacterListView.characters from list view.render', this.characters);
-  // for (character of this.characters) {
-  //   const characterView = new CharacterView(character, this.container);
-  //   characterView.render();
-  // };
-  const characterView = new CharacterView(this.characters[0], this.container);
-  characterView.render();
+  for (character of this.characters) {
+    const characterView = new CharacterView(character, this.container);
+    characterView.render();
+  };
 };
 
 module.exports = CharacterListView;

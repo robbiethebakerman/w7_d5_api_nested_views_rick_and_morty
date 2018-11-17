@@ -1,5 +1,5 @@
 const PubSub = require('../helpers/pub_sub.js');
-const Request = require('../helpers/request.js');
+const RequestHelper = require('../helpers/request.js');
 
 const Characters = function () {
  this.data = [];
@@ -9,39 +9,30 @@ const Characters = function () {
 // Commented out below to limit api requests for now //
 ///////////////////////////////////////////////////////
 
-// Characters.prototype.bindEvents = function () {
-//   const pageRange = [...Array(26).keys()];
-//   pageRange.shift();
-//   console.log('pageRange', pageRange);
-//   for (page of pageRange) {
-//     const request = new Request(`https://rickandmortyapi.com/api/character/?page=${page}`);
-//     request.get()
-//     .then((data) => {
-//       for (character of data.results) {
-//         this.data.push(character);
-//       };
-//     })
-//     .catch((err) => {
-//       return
-//     });
-//   };
-//   PubSub.publish('Characters:characters-ready', this.data);
-//   console.log('characters data from within characters model bindEvents', this.data);
-// };
-
 Characters.prototype.bindEvents = function () {
-    const request = new Request(`https://rickandmortyapi.com/api/character`);
-    request.get()
-    .then((data) => {
+  const pageRange = [...Array(26).keys()];
+  pageRange.shift();
+  console.log('pageRange', pageRange);
+  for (page of pageRange) {
+    const request = new RequestHelper(`https://rickandmortyapi.com/api/character/?page=${page}`);
+    request.get((data) => {
       for (character of data.results) {
         this.data.push(character);
       };
-    })
-    .catch((err) => {
-      return;
+      PubSub.publish('Characters:characters-ready', this.data);
     });
-  PubSub.publish('Characters:characters-ready', this.data);
+  };
   console.log('characters data from within characters model bindEvents', this.data);
 };
+//
+// Characters.prototype.bindEvents = function () {
+//   const request = new RequestHelper(`https://rickandmortyapi.com/api/character`);
+//   request.get((data) => {
+//     for (character of data.results) {
+//       this.data.push(character);
+//     };
+//     PubSub.publish('Characters:characters-ready', this.data);
+//   });
+// };
 
 module.exports = Characters;
