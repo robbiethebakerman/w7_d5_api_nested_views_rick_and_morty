@@ -16,6 +16,9 @@ Characters.prototype.bindEvents = function () {
       for (character of data.results) {
         this.data.push(character);
       };
+    })
+    .catch((err) => {
+      return
     });
   };
   PubSub.publish('Characters:characters-ready', this.data);
