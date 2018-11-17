@@ -1,0 +1,24 @@
+const PubSub = require('../helpers/pub_sub.js');
+const Request = require('../helpers/request.js');
+
+const Characters = function () {
+ this.data = [];
+};
+
+Characters.prototype.bindEvents = function () {
+  const pageRange = [...Array(26).keys()];
+  pageRange.shift();
+  console.log('pageRange', pageRange);
+  for (page of pageRange) {
+    const request = new Request(`https://rickandmortyapi.com/api/character/?page=${page}`);
+    request.get((data) => {
+      for (character of data.results) {
+        this.data.push(character);
+      };
+      PubSub.publish('Characters:characters-ready', this.data);
+    });
+  };
+  console.log('characters data from within characters model bindEvents.get', this.data);
+};
+
+module.exports = Characters;
