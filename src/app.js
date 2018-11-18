@@ -15,4 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
   characters.bindEvents();
   console.log('chracters data from app', characters.data);
 
+  const speciesSelectContainer = document.querySelector('.species-select');
+  const speciesSelectView = new SpeciesSelectView(speciesSelectContainer);
+  speciesSelectView.bindEvents();
+
 });

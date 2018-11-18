@@ -6,7 +6,6 @@ const CharacterView = function (character, container) {
 CharacterView.prototype.render = function () {
   const divWrapper = document.createElement('div');
   divWrapper.classList.add('character-view');
-  // console.log('divWrapper from within char view', divWrapper);
 
   const name = this.createTextElement('h2', this.character.name, 'character-name');
   divWrapper.appendChild(name);
