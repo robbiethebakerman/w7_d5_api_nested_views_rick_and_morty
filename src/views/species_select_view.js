@@ -17,6 +17,7 @@ SpeciesSelectView.prototype.bindEvents = function () {
 };
 
 SpeciesSelectView.prototype.populate = function (speciesList) {
+  this.selectElement.innerHTML = '';
   for (species of speciesList) {
     this.addOption(species);
   };

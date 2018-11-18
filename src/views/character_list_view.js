@@ -22,7 +22,7 @@ CharacterListView.prototype.render = function () {
   this.container.innerHTML = '';
   for (character of this.characters) {
     const characterView = new CharacterView(character, this.container);
-    characterView.render();
+    characterView.renderContainer();
   };
 };
 
